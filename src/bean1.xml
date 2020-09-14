@@ -3,5 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--配置HelloWorld对象创建-->
-    <bean id="helloworld" class="com.spring.demo.HelloWorld"></bean>
+<!--    <bean id="helloworld" class="com.spring.demo.HelloWorld"></bean>-->
+    <!-- set 方法注入属性-->
+    <bean id="book" class="com.spring.demo.Book">
+        <!--使用property标签-->
+        <property name="bookAuthor" value="Ming Zhang"></property>
+        <property name="bookName" value="炼丹术"></property>
+    </bean>
 </beans>

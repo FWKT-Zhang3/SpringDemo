@@ -8,11 +8,23 @@ public class TestHelloWorld {
     @Test
     public void test1HW() {
         //1、加载spring配置文件
-        ApplicationContext context = new FileSystemXmlApplicationContext("src/bean1.xml");
+        ApplicationContext context =
+                new FileSystemXmlApplicationContext("src/bean1.xml");
         //2、获取配置文件创建的对象
         HelloWorld helloWorld = context.getBean("helloworld", HelloWorld.class);
 
         System.out.println(helloWorld);
         helloWorld.helloWorld();
+    }
+
+    @Test
+    public void testBook() {
+        //1、加载spring配置文件
+        ApplicationContext context =
+                new FileSystemXmlApplicationContext("src/bean1.xml");
+        //2、获取配置文件创建的对象
+        Book book = context.getBean("book", Book.class);
+
+        System.out.println(book.getBookAuthor() + ": " + book.getBookName());
     }
 }

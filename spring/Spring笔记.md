@@ -99,6 +99,42 @@ Bean管理操作有两种方式
    </bean>
    ```
 
+   xml注入其他类型属性：
+
+   1、字面量
+
+   * null值
+
+   ```xml
+   <!-- null值 -->
+   <property name="address">
+   	<null/>
+   </property>
+   ```
+
+   * 特殊符号
+
+   ```xml
+   <!-- 特殊符号值 -->
+   // 1. 转义 &lt; &gt;
+   // 2. 把特殊符号内筒写到CDATA
+   <property name="address">
+   	<value>
+           <![CDATA[<<南京>>]]>
+       </value>
+   </property>
+   ```
+
+   外部 bean
+
+   ```xml
+   <bean id="userService" class="com.atguigu.srping5.service.UserService">
+   	<!-- 注入userDao对象 -->
+       <property name="userDao" ref="userDaoImpl"></property>
+   </bean>
+   <bean id="userDaoImpl" class="com.atguigu.spring5.dao.UserDaoImpl"></bean>
+   ```
+
    
 
 2. 基于注解方式实现

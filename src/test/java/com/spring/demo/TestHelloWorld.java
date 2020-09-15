@@ -1,5 +1,6 @@
 package com.spring.demo;
 
+import com.spring.bean.Emp;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -37,5 +38,16 @@ public class TestHelloWorld {
         Orders order = context.getBean("order", Orders.class);
 
         System.out.println(order.getAddress() + ": " + order.getOrderName());
+    }
+
+    @Test
+    public void testEmp() {
+        //1、加载spring配置文件
+        ApplicationContext context =
+                new FileSystemXmlApplicationContext("src/bean3.xml");
+        //2、获取配置文件创建的对象
+        Emp emp = context.getBean("emp", Emp.class);
+
+        emp.testEmp();
     }
 }

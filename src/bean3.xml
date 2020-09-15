@@ -2,14 +2,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!-- 内部bean -->
+<!--    &lt;!&ndash; 内部bean &ndash;&gt;-->
+<!--    <bean id="emp" class="com.spring.bean.Emp">-->
+<!--        <property name="ename" value="Max"></property>-->
+<!--        <property name="gender" value="male"></property>-->
+<!--        <property name="dept">-->
+<!--            <bean id="dept" class="com.spring.bean.Dept">-->
+<!--                <property name="dname" value="安保部"></property>-->
+<!--            </bean>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+    <!-- 级联赋值 -->
     <bean id="emp" class="com.spring.bean.Emp">
-        <property name="ename" value="Max"></property>
-        <property name="gender" value="male"></property>
-        <property name="dept">
-            <bean id="dept" class="com.spring.bean.Dept">
-                <property name="dname" value="安保部"></property>
-            </bean>
-        </property>
+        <property name="ename" value="Max"/>
+        <property name="gender" value="male"/>
+        <property name="dept" ref="dept"/>
+        <property name="dept.dname" value="安保部"/>
     </bean>
+    <bean id="dept" class="com.spring.bean.Dept"/>
 </beans>

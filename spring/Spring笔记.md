@@ -135,6 +135,33 @@ Bean管理操作有两种方式
    <bean id="userDaoImpl" class="com.atguigu.spring5.dao.UserDaoImpl"></bean>
    ```
 
+   内部bean
+
+   ```xml
+   <!-- 内部bean -->
+   <bean id="emp" class="com.spring.bean.Emp">
+       <property name="ename" value="Max"></property>
+       <property name="gender" value="male"></property>
+       <property name="dept">
+           <bean id="dept" class="com.spring.bean.Dept">
+               <property name="dname" value="安保部"></property>
+           </bean>
+       </property>
+   </bean>
+   ```
+
+   级联赋值
+
+   ```xml
+   <bean id="emp" class="com.spring.bean.Emp">
+       <property name="ename" value="Max"/>
+       <property name="gender" value="male"/>
+       <property name="dept" ref="dept"/>
+       <property name="dept.dname" value="安保部"/>
+   </bean>
+   <bean id="dept" class="com.spring.bean.Dept"/>
+   ```
+
    
 
 2. 基于注解方式实现

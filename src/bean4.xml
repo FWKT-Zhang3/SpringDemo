@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="collectionXML" class="com.spring.demo.CollectionTest">
+        <property name="arr">
+            <array>
+                <value>张三</value>
+                <value>李四</value>
+            </array>
+        </property>
+        <property name="list">
+            <list>
+                <value>王老五</value>
+                <value>赵政委</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="张三丰" value="太极拳"/>
+                <entry key="虚竹" value="梦姑"/>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>易筋经</value>
+                <value>乾坤大挪移</value>
+            </set>
+        </property>
+    </bean>
+</beans>

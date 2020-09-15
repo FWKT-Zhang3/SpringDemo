@@ -27,4 +27,15 @@ public class TestHelloWorld {
 
         System.out.println(book.getBookAuthor() + ": " + book.getBookName());
     }
+
+    @Test
+    public void testOrders() {
+        //1、加载spring配置文件
+        ApplicationContext context =
+                new FileSystemXmlApplicationContext("src/bean1.xml");
+        //2、获取配置文件创建的对象
+        Orders order = context.getBean("order", Orders.class);
+
+        System.out.println(order.getAddress() + ": " + order.getOrderName());
+    }
 }

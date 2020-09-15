@@ -5,9 +5,14 @@
     <!--配置HelloWorld对象创建-->
 <!--    <bean id="helloworld" class="com.spring.demo.HelloWorld"></bean>-->
     <!-- set 方法注入属性-->
-    <bean id="book" class="com.spring.demo.Book">
-        <!--使用property标签-->
-        <property name="bookAuthor" value="Ming Zhang"></property>
-        <property name="bookName" value="炼丹术"></property>
+<!--    <bean id="book" class="com.spring.demo.Book">-->
+<!--        &lt;!&ndash;使用property标签&ndash;&gt;-->
+<!--        <property name="bookAuthor" value="Ming Zhang"></property>-->
+<!--        <property name="bookName" value="炼丹术"></property>-->
+<!--    </bean>-->
+    <!-- 有参构造器注入属性-->
+    <bean id="order" class="com.spring.demo.Orders">
+        <constructor-arg name="orderName" value="a Name"></constructor-arg>
+        <constructor-arg name="address" value="UQ"></constructor-arg>
     </bean>
 </beans>

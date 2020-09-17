@@ -406,4 +406,97 @@ AOP底层使用动态代理
    * 语法：execution([权限修饰符] [返回类型] [类全路径] ([参数列表]))
 
    > execution(* com.atguigu.dao.BookDao.add()) *\*号表示所有*
+   
+   
+   
+   进行通知的配置
+   
+   * 在spring配置文件中，开启注解扫描
+   
+     引入名称空间，开启注解扫描
+   
+     ```xml
+     <?xml version="1.0" encoding="UTF-8"?>
+     <beans xmlns="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xmlns:aop="http://www.springframework.org/schema/aop"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+     
+     <context:component-scan base-package="com.spring.aop"/>
+     
+     </beans>
+     ```
+   
+   * 使用注解创建User和UserProxy对象
+   
+     给类加@Component注解
+   
+   * 在增强类上面添加注解
+   
+     @Aspect
+   
+   * 在spring配置文件中开启生成代理对象
+   
+     ```xml
+     <aop:aspectj-autoproxy/>
+     ```
+   
+   配置不同类型的通知
+   
+   在增强类里，在作为通知方法上面添加通知类型注解，使用切入点表达式配置
+   
+   ```java
+   /**
+    * 增强的类
+    */
+   @Component
+   @Aspect
+   public class UserProxy {
+   
+       // 前置通知
+       // @Before注解表示前置通知
+       @Before(value="execution(* com.spring.aop.User.add(..))")
+       public void before() {
+           System.out.println("before...");
+       }
+   }
+   ```
+   
+   
+   
+   相同切入点抽取
+   
+   ```java
+   // 相同切入点抽取
+   @Pointcut(value="execution(* com.spring.aop.User.add(..))")
+   public void pointdemo() {}
+   
+   // 前置通知
+   @Before(value="pointdemo()")
+   public void before() {
+       System.out.println("before...");
+   }
+   ```
+   
+   
+   
+   有多个增强类，设定增强类的优先级
+   
+   @Order(数字类型值)  数字类型值越小优先级越高
+   
+   
+   
+   完全注解开发
+   
+   ```java
+   @Configuration
+   @ComponentScan(basePackages={"com.spring.aop"})
+   @EnableAspectJAutoProxy(proxyTargeClass=true)
+   puclic class ConfigAop() {}
+   ```
+   
+   
 

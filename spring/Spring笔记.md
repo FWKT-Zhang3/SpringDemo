@@ -101,7 +101,7 @@ Bean管理操作有两种方式
 
    xml注入其他类型属性：
 
-   1、字面量
+   字面量
 
    * null值
 
@@ -162,7 +162,114 @@ Bean管理操作有两种方式
    <bean id="dept" class="com.spring.bean.Dept"/>
    ```
 
-   
+   Spring有两种bean类型，一种普通bean，一种工厂bean：
+
+   * 普通bean：
+
+     在配置文件中，定义的bean类型就是返回类型
+
+   * 工厂bean：
+
+     在配置文件中，定义的bean类型可以和返回类型不一样
+
+     （实现FactoryBean接口）
+
+
+
+​	bean作用域：
+
+​	a. 在Spring里面，设置创建bean实例是单实例还是多实例（默认是单实例）
+
+> 单实例：只有一个实例
+>
+> 多实例：每次获取不同实例
+
+​	b. Spring配置bean标签中有属性**scope**用于设置单实例还是多实例（默认值：singleton（单	实例），prototype（多实例），requset，session）
+
+​	设置为singleton的时候，加载spring配置文件的时候就会创建单实例对象
+
+​	设置为prototype的时候，在调用getBean方法时创建对象
+
+​	
+
+​	bean生命周期
+
+​	（1）通过构造器创建bean实例（无参数构造）
+
+​	（2）为bean的属性设置值和对其他bean引用（调用set方法）
+
+​	（3）调用bean的初始化的方法（需要进行配置）
+
+​	（4）获取bean对象
+
+​	（5）容器关闭时，调用bean的销毁的方法（需要进行配置销毁的方法）
+
+​	XML自动装配
+
+* 根据指定装配规则（属性名称或者属性类型），Spring自动将匹配的属性值进行注入
+
+```xml
+<!-- 自动装配 
+	bean标签属性：autowire，配置自动装配
+	autowire属性常用值：
+		byName：根据属性名称注入，注入值bean的id和类属性名称一样
+		byType：根据属性类型注入
+-->
+```
+
+​	外部属性文件
+
+​	（1）直接配置数据库信息
+
+​			配置德鲁伊连接池
+
+​			引入德鲁伊连接池依赖jar包
+
+​	（2）引入外部属性文件配置数据库连接池
 
 2. 基于注解方式实现
+
+   注解是代码特殊标记——@注解名称（属性名称=属性值，属性名称=属性值...）
+
+   注解作用在类上面，方法上面，属性上面
+
+   相比于xml方式，简洁方便
+
+   
+
+   Spring针对Bean管理中的创建对象提供以下注解：
+
+   * @Component
+   * @Service
+   * @Controller
+   * @Repository
+
+   > 四个注解功能是一样的，都可以用来创建bean实例。每个注解可以用在不同的层上，在开发时，为了方便开发人员，最好将相应的注解写在相应的层上。
+
+   基于注解方式创建对象：
+
+   * 引入依赖
+
+   * 开启组件扫描
+
+     * 在配置文件中引入名称空间
+
+     ```xml
+     <!-- 开启组件扫描 -->
+     <context:component-scan base-package="com.spring.demo"/>
+     
+     ##########################################################
+     
+     // 注解里面value属性值可以省略不写
+     // 默认值是类名称，首字母小写
+     @Component(value = "annotationTest") //<bean id="annotationTest" class".."/>
+     public class AnnotationTest {
+         public void a() {
+             System.out.println("A method");
+         }
+     }
+     
+     ```
+
+   * 创建类，在类上面添加创建对象注解
 

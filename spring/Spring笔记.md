@@ -237,6 +237,8 @@ Bean管理操作有两种方式
 
    
 
+   **创建对象**：
+
    Spring针对Bean管理中的创建对象提供以下注解：
 
    * @Component
@@ -258,7 +260,7 @@ Bean管理操作有两种方式
      <!-- 开启组件扫描 -->
      <context:component-scan base-package="com.spring.demo"/>
      
-     ##########################################################
+     ############################################################################################################
      
      // 注解里面value属性值可以省略不写
      // 默认值是类名称，首字母小写
@@ -273,3 +275,76 @@ Bean管理操作有两种方式
 
    * 创建类，在类上面添加创建对象注解
 
+   ```xml
+   <!--
+   如果不设置filter，系统使用默认filter
+   可以通过修改use-default-filters="false" 来自己配置filter
+   context:include-filter, 设置扫描哪些内容
+   contest:exclude-filter, 设置不扫描哪些内容
+   -->
+   <context:component-scan base-package="com.spring.demo" use-default-filters="false">
+       <context:include-filter type="annotation"
+                               expression="org.springframework.stereotype.Controller"/>
+   </context:component-scan>
+   ```
+
+   
+
+   **属性注入**：
+
+   * @Autowired：根据属性类型进行自动装配
+   * @Qualifier：根据属性名称注入（需要和Autowired一起使用）
+   * @Resource：可以根据类型注入，可以根据名称注入
+   * @Value：注入普通类型属性
+
+```java
+@Service
+public class UserService {
+
+    // 不需要添加set方法
+    // 添加注入属性注解
+    @Autowired // 根据类型注入
+    @Qualifier(value = "userDaoImpl2")
+    private UserDao userDao;
+
+    public void a() {
+        System.out.println("User Service");
+        userDao.a();
+    }
+}
+```
+
+```java
+//    @Resource // 根据类型注入
+    @Resource(name = "userDaoImpl2") // 根据名称注入
+    private UserDao userDao;
+// @Resource不是Spring包中的，是javax（java拓展包）包中的
+```
+
+```java
+@Value(value = "A String")
+private String s;
+```
+
+
+
+**完全注解开发**（不使用xml配置文件）
+
+创建配置类替代配置文件：
+
+```java
+//使用@Configuration将类作为配置类，替代xml配置文件
+//使用@ComponentScan替代组件扫描
+@Confuguration
+@ComponentScan(basePackages = {"com.spring.demo"})
+public class SpringConfigDemo {
+}
+
+// 一般使用SpringBoot做
+```
+
+
+
+## AOP（面向切面编程）
+
+利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。

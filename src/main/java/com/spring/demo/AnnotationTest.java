@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 // 默认值是类名称，首字母小写
 @Component(value = "annotationTest") //<bean id="annotationTest" class".."/>
 public class AnnotationTest {
+
     public void a() {
         System.out.println("A method");
     }

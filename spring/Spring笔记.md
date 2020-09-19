@@ -494,7 +494,7 @@ AOP底层使用动态代理
    ```java
    @Configuration
    @ComponentScan(basePackages={"com.spring.aop"})
-   @EnableAspectJAutoProxy(proxyTargeClass=true)
+   @EnableAspectJAutoProxy(proxyTargetClass=true)
    puclic class ConfigAop() {}
    ```
    
